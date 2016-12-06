@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dao.FoodDao;
 import com.dao.TypeDao;
+import com.dao.impl.FoodDaoImpl;
 import com.dao.impl.TypeDaoImpl;
+import com.entity.Food;
 import com.entity.Type;
 
 /**
@@ -60,13 +63,17 @@ public class initServlet extends HttpServlet {
 		String method = request.getParameter("method");
 		// 引入相关接口及实现类
 		TypeDao td = new TypeDaoImpl();
+		FoodDao fd = new FoodDaoImpl();
 
-		// 声明并实例化一个List<Type>对象users用以存储职员信息
+		// 声明并实例化List<>对象用以存储信息
 		List<Type> types = td.getAllTypes();
+		List<Food> latestFoods = fd.getLatestFoods(4);
 
 		// 传值并跳转
-		request.setAttribute("types", types);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getSession().setAttribute("types", types);
+		request.getSession().setAttribute("latestFoods", latestFoods);
+		// request.getRequestDispatcher("index.jsp").forward(request, response);
+		response.sendRedirect("index.jsp");
 	}
 
 }

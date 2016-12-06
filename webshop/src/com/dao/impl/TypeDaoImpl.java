@@ -21,11 +21,11 @@ public class TypeDaoImpl extends DBUtil implements TypeDao {
 		ResultSet rst = super.exceQuery(sql);
 		try {
 			while (rst.next()) {
-				int typeId = rst.getInt(1);
-				String typeName = rst.getString(2);
+				int id = rst.getInt(1);
+				String name = rst.getString(2);
 
 				// 声明并实例化一个Type对象type用来存储查询结果
-				Type type = new Type(typeId, typeName);
+				Type type = new Type(id, name);
 				// 将结果保存至列表
 				types.add(type);
 

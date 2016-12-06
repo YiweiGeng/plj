@@ -48,9 +48,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul>
 						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">webshop@example.com</a></li>
 						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+0791 87046xxx</li>
-						<li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="login.jsp">登&nbsp;录</a></li>
-						<li><i class="glyphicon glyphicon-book" aria-hidden="true"></i><a href="register.jsp">注&nbsp;册</a></li>
-					</ul>
+						<c:if test="${empty loginUser }">
+							<li><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i><a href="login.jsp">登&nbsp;录</a></li>
+							<li><i class="glyphicon glyphicon-book" aria-hidden="true"></i><a href="register.jsp">注&nbsp;册</a></li>
+						</c:if>
+						<c:if test="${!empty loginUser }">
+							<li>欢迎回来，${loginUser.name }<li>
+							<li><i class="glyphicon glyphicon-log-out" aria-hidden="true"></i><a href="UserServlet?method=Logout">注&nbsp;销</a></li>
+						</c:if>
+						</ul>
 				</div>
 				<!-- <div class="header-grid-right animated wow slideInRight" data-wow-delay=".5s">
 					<ul class="social-icons">
@@ -86,13 +92,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<c:if test="${!empty types}">
 									<ul class="dropdown-menu">
 										<c:forEach items="${types }" var="type">
-											<li><a href="">${type.name }</a></li>
+											<li><a href="FoodServlet?method=GetByType/${type.id }">${type.name }</a></li>
 										</c:forEach>
 									</ul>
 								</c:if>
 							</li>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">我的账户(${loginUser.name })<b class="caret"></b></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">我的账户<b class="caret"></b></a>
 								<ul class="dropdown-menu multi-column columns-3">
 									<div class="row">
 										<div class="col-sm-4">
@@ -155,21 +161,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="header-right">
 					<div class="cart box_1">
-						<a href="checkout.html">
-							<h3> <div class="total">
-								<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
-								<img src="images/bag.png" alt="" />
-							</h3>
-						</a>
-						<p>
 							<a href="javascript:;" class="simpleCart_empty">
-								<c:if test="${empty loginUser }">用户暂未登录</c:if>
 								<c:if test="${!empty loginUser }">
-									<c:if test="${empty carts }">购物车为空</c:if>
-									<c:if test="${!empty carts }"></c:if>
+									<a href="checkout.html">
+										<h3> <div class="total">
+											<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
+											<img src="images/bag.png" alt="" />
+										</h3>
+									</a>
 								</c:if>
 							</a>
-						</p>
 						<div class="clearfix"> </div>
 					</div>	
 				</div>

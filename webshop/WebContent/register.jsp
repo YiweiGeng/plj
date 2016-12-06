@@ -22,16 +22,40 @@
 			<p class="est animated wow zoomIn" data-wow-delay=".5s">注册时务必填写相关信息，谢谢</p>
 			<div class="login-form-grids">
 				<h6 class="animated wow slideInUp" data-wow-delay=".5s">账户信息</h6>
-				<form class="animated wow slideInUp" data-wow-delay=".5s" method="post" action="UserServlet?method=Add">
-					<input type="text" name="account" placeholder="账号" required="required " >
-					<input type="text" name="name" placeholder="昵称" required="required " >
-					<input type="password" name="pwd" placeholder="密码" required="required " >
-					<input type="password" name="pwdconfirm" placeholder="请确认密码" required="required " >
-					<input type="submit" value="注&nbsp;册">
+				<form class="animated wow slideInUp" data-wow-delay=".5s" method="post">
+					<input type="text" id="account" name="account" placeholder="账号" required="required " >
+					<input type="text" id="name" name="name" placeholder="昵称" required="required " >
+					<input type="password" id="pwd" name="pwd" placeholder="密码" required="required " >
+					<input type="password" id="pwdConfirm" name="pwdConfirm" placeholder="请确认密码" required="required " >
+					<input type="submit" onclick="registe()" value="注&nbsp;册">
 				</form>
 			</div>
 		</div>
 	</div>
 <!-- //register -->
-
+<script type="text/javascript">
+	function registe() {
+		var account = $("#account").val();
+		var name = $("#name").val();
+		var pwd = $("#pwd").val();
+		var pwdConfirm = $("#pwdConfirm").val();
+		if(pwd.length<6) {
+			alert("密码必须大于6位，请重新输入");
+		}
+		else if(pwd==pwdConfirm){
+			$.ajax({
+				type:"post",
+				url:"UserServlet?method=Add",
+				data:{
+					"account":account,
+					"pwd":pwd,
+					"name":name,
+				}
+			})
+		}
+		else{
+			alert("两次输入的密码不一致，请重新输入");
+		}
+	}
+</script>
 <c:import url="footer.jsp"></c:import>
