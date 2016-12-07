@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.15)
 # Database: webshop
-# Generation Time: 2016-12-06 15:40:18 +0000
+# Generation Time: 2016-12-07 12:00:59 +0000
 # ************************************************************
 
 
@@ -53,7 +53,7 @@ VALUES
 	(11,'奶昔',13,50,'images/yinpin/naixi.jpg',5),
 	(12,'点心',10,99,'images/tianpin/dianxin.jpg',3),
 	(14,'小蛋糕',9,99,'images/tianpin/xiaodangao.jpg',3),
-	(15,'羊肉面',15,80,'images/zhushi/yangroumian.jpg',2),
+	(15,'牛肉面',15,80,'images/zhushi/niuroumian.jpg',2),
 	(16,'米线',16.5,80,'images/zhushi/mixian.jpg',2),
 	(17,'奶茶',16,50,'images/yinpin/naicha.jpg',5),
 	(18,'绿豆粥',9,30,'images/zhoutang/lvdouzhou.jpg',4),

@@ -27,7 +27,7 @@
 					<div class="forgot">
 						<a href="#">忘记密码？</a>
 					</div>
-					<input type="submit" value="Login">
+					<input type="submit" value="登&nbsp;录">
 				</form>
 			</div>
 			<h4 class="animated wow slideInUp" data-wow-delay=".5s">没有帐号？</h4>

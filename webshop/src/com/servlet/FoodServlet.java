@@ -86,6 +86,14 @@ public class FoodServlet extends HttpServlet {
 			// 变量存储并转发跳转
 			request.setAttribute("foods", foods);
 			request.getRequestDispatcher("foods.jsp").forward(request, response);
+		} else if ("GetByType".equals(method)) {
+			// 页面取值
+			int type_id = Integer.parseInt(request.getParameter("type"));
+			// 执行查询操作
+			List<Food> foods = fd.getFoodsByType(type_id);
+			// 变量存储并转发跳转
+			request.setAttribute("foods", foods);
+			request.getRequestDispatcher("foods.jsp").forward(request, response);
 		}
 	}
 

@@ -92,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<c:if test="${!empty types}">
 									<ul class="dropdown-menu">
 										<c:forEach items="${types }" var="type">
-											<li><a href="FoodServlet?method=GetByType/${type.id }">${type.name }</a></li>
+											<li><a href="FoodServlet?method=GetByType&type=${type.id }">${type.name }</a></li>
 										</c:forEach>
 									</ul>
 								</c:if>
@@ -144,8 +144,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="logo-nav-right">
 					<div class="search-box">
 						<div id="sb-search" class="sb-search">
-							<form>
-								<input class="sb-search-input" placeholder="请输入关键词" type="search" id="search">
+							<form action="FoodServlet?method=Search" method="post">
+								<input class="sb-search-input" name="keyword" placeholder="请输入关键词" type="search" id="search">
 								<input class="sb-search-submit" type="submit" value="">
 								<span class="sb-icon-search"> </span>
 							</form>
