@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/jquery.min.js"></script>
 <!-- //js -->
 <!-- cart -->
-<script src="js/simpleCart.min.js"></script>
+<!-- <script src="js/simpleCart.min.js"></script> -->
 <!-- cart -->
 <!-- for bootstrap working -->
 <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
@@ -37,6 +38,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  new WOW().init();
 </script>
 <!-- //animation-effect -->
+<script type="text/javascript">	
+function addToCart(food_id){
+	var user_id = $("#user_id").val();
+	if (user_id==null){
+		alert("您未登录，请登录后再尝试！");
+	}
+	var quantity = $("#quantity").val();
+	if (quantity==null)
+		quantity = 1;
+	$.ajax({
+		type:"post",
+		url:"CartServlet?method=Add",
+				dataType:"text",
+				data:{
+					"user_id":user_id,
+					"food_id":food_id,
+					"quantity":quantity,
+				},
+				success:function(data){
+					alert(data);
+				}
+	}) 
+}
+</script>
 </head>
 	
 <body>
@@ -53,7 +78,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><i class="glyphicon glyphicon-book" aria-hidden="true"></i><a href="register.jsp">注&nbsp;册</a></li>
 						</c:if>
 						<c:if test="${!empty loginUser }">
+							<%-- <input type="hidden" id="id" value="${loginUser.id }" /> --%>
 							<li>欢迎回来，${loginUser.name }<li>
+							<input type="hidden" value="${loginUser.id }" id="user_id" />
 							<li><i class="glyphicon glyphicon-log-out" aria-hidden="true"></i><a href="UserServlet?method=Logout">注&nbsp;销</a></li>
 						</c:if>
 						</ul>
@@ -144,7 +171,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="logo-nav-right">
 					<div class="search-box">
 						<div id="sb-search" class="sb-search">
-							<form action="FoodServlet?method=Search" method="post">
+							<form action="FoodServlet?" method="get">
+								<input type="hidden" name="method" value="Search" />
 								<input class="sb-search-input" name="keyword" placeholder="请输入关键词" type="search" id="search">
 								<input class="sb-search-submit" type="submit" value="">
 								<span class="sb-icon-search"> </span>
@@ -163,12 +191,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="cart box_1">
 							<a href="javascript:;" class="simpleCart_empty">
 								<c:if test="${!empty loginUser }">
-									<a href="checkout.html">
-										<h3> <div class="total">
-											<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
-											<img src="images/bag.png" alt="" />
+									<a href="CartServlet?method=All&user_id=${loginUser.id }">
+										<h3> 
+												<c:if test="${empty carts }">购物车为空</c:if>
+												<c:if test="${!empty carts }">
+													<div class="total">
+													<img src="images/bag.png" alt="" />
+													<span class="simpleCart_total"></span> (${fn:length(carts) }<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)</div>
+													
+												</c:if>
 										</h3>
 									</a>
+									<!-- <script type="text/javascript">
+										function cart(){
+											var id = $("#id").val();
+											$.ajax({
+												type:"post",
+												url:"CartServlet?method=All",
+												data:{
+													"user_id":id,
+												}
+											})
+										}
+									</script> -->
 								</c:if>
 							</a>
 						<div class="clearfix"> </div>

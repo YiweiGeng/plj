@@ -76,7 +76,7 @@ public class FoodServlet extends HttpServlet {
 			// 执行查询操作
 			Food food = fd.getFood(id);
 			// 变量存储并转发跳转
-			request.setAttribute("foodDetail", food);
+			request.setAttribute("food", food);
 			request.getRequestDispatcher("detail.jsp").forward(request, response);
 		} else if ("Search".equals(method)) {
 			// 页面取值

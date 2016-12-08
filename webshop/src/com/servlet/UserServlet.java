@@ -2,6 +2,7 @@ package com.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dao.CartDao;
 import com.dao.UserDao;
+import com.dao.impl.CartDaoImpl;
 import com.dao.impl.UserDaoImpl;
+import com.entity.Cart;
 import com.entity.User;
 
 /**
@@ -60,6 +64,7 @@ public class UserServlet extends HttpServlet {
 		String method = request.getParameter("method");
 		// 引入相关接口及实现类
 		UserDao ud = new UserDaoImpl();
+		CartDao cd = new CartDaoImpl();
 
 		if ("Add".equals(method)) {
 			// 页面取值
@@ -88,8 +93,11 @@ public class UserServlet extends HttpServlet {
 			String pwd = request.getParameter("pwd");
 
 			User loginUser = ud.loginUser(account, pwd);
+			List<Cart> carts = cd.getAllCartsByUserId(loginUser.getId());
+			// int c = carts.size();
 			// 设置Session存储并跳转转发
 			request.getSession().setAttribute("loginUser", loginUser);
+			request.getSession().setAttribute("carts", carts);
 			// request.getRequestDispatcher("index.jsp").forward(request,
 			// response);
 			response.sendRedirect("initServlet");

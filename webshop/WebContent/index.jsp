@@ -57,18 +57,18 @@
 				<div class="col-md-3 new-collections-grid">
 					<div class="new-collections-grid1 new-collections-grid1-image-width animated wow slideInUp" data-wow-delay=".5s">
 						<div class="new-collections-grid1-image">
-							<a href="FoodServlet?method=GetById/${latestFood.id }" class="product-image"><img src="${latestFood.pic }" alt="${latestFood.name } " class="img-responsive" /></a>
+							<a href="FoodServlet?method=GetById&id=${latestFood.id }" class="product-image"><img src="${latestFood.pic }" alt="${latestFood.name } " class="img-responsive" /></a>
 							<div class="new-collections-grid1-image-pos new-collections-grid1-image-pos1">
-								<a href="">查看详情</a>
+								<a href="FoodServlet?method=Detail&id=${latestFood.id }">查看详情</a>
 							</div>
 							<div class="new-one">
 								<p>新品</p>
 							</div>
 						</div>
-						<h4><a href="FoodServlet?method=GetById/${latestFood.id }">${latestFood.name }</a></h4>
+						<h4><a href="FoodServlet?method=Detail&id=${latestFood.id }">${latestFood.name }</a></h4>
 						<p></p>
-						<div class="new-collections-grid1-left simpleCart_shelfItem">
-							<p><!-- <i>$580</i>  --><span class="item_price">￥ ${latestFood.price }</span><a class="item_add" href="#">添加到购物车</a></p>
+						<div class="new-collections-grid1-left simpleCart_shelfItem" >
+							<p><!-- <i>$580</i>  --><span class="item_price">￥ ${latestFood.price }</span><a class="item_add" href="" onclick="addToCart(${latestFood.id })">添加到购物车</a></p>
 						</div>
 					</div>
 				</div>

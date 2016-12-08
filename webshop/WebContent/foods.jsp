@@ -42,7 +42,7 @@
 								<div class="new-products-grid-right">
 									<h4><a href="single.html">${latestFood.name }</a></h4>
 									<div class="simpleCart_shelfItem new-products-grid-right-add-cart">
-										<p> <span class="item_price">￥ ${latestFood.price }</span><a class="item_add" href="#">添加到购物车</a></p>
+										<p> <span class="item_price">￥ ${latestFood.price }</span><a class="item_add" href="" onclick="addToCart(${latestfood.id})">添加到购物车</a></p>
 									</div>
 								</div>
 								<div class="clearfix"> </div>
@@ -75,12 +75,12 @@
 									<div class="new-collections-grid1-image">
 										<a href="single.html" class="product-image"><img src="${food.pic }" alt=" " class="img-responsive"></a>
 										<div class="new-collections-grid1-image-pos products-right-grids-pos">
-											<a href="single.html">查看详情</a>
+											<a href="FoodServlet?method=Detail&id=${food.id }">查看详情</a>
 										</div>
 									</div>
 									<h4><a href="single.html">${food.name }</a></h4>
 									<div class="simpleCart_shelfItem products-right-grid1-add-cart">
-										<p><!-- <i>$325</i>  --><span class="item_price">￥ ${food.price }</span><a class="item_add" href="#">添加到购物车</a></p>
+										<p><!-- <i>$325</i>  --><span class="item_price">￥ ${food.price }</span><a class="item_add" href="" onclick="addToCart(${food.id})">添加到购物车</a></p>
 									</div>
 								</div>
 							</div>
