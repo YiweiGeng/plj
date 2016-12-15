@@ -74,16 +74,20 @@ public class UserServlet extends HttpServlet {
 
 			// 对必须字段进行判空
 			if (account == null || name == null || pwd == null) {
-				response.sendRedirect("register.jsp");
+				out.println("请填写所有字段");
 			}
 			// 对登录名（联系方式）进行检查，要求唯一
 			else if (!ud.check(account)) {
-				response.sendRedirect("register.jsp");
+				out.println("该账户已存在");
 			}
 			// 所有核验通过，执行新增操作
 			else {
-				ud.addUser(account, pwd, name);
-				response.sendRedirect("login.jsp");
+				int n = ud.addUser(account, pwd, name);
+				if (n == 0) {
+					out.println("注册失败");
+				} else {
+					out.println("注册成功");
+				}
 			}
 		}
 
@@ -104,7 +108,9 @@ public class UserServlet extends HttpServlet {
 		}
 
 		else if ("Logout".equals(method)) {
-			request.getSession().setAttribute("loginUser", null);
+			request.getSession().removeAttribute("loginUser");
+			request.getSession().removeAttribute("carts");
+			request.getSession().invalidate();
 			response.sendRedirect("login.jsp");
 		}
 	}

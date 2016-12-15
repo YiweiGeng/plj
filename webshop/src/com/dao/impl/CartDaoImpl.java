@@ -17,8 +17,8 @@ public class CartDaoImpl extends DBUtil implements CartDao {
 		// 声明一个List<cart>对象carts
 		List<Cart> carts = new ArrayList<Cart>();
 		// sql语句
-		String sql = "SELECT * FROM `cart_food`";
-		ResultSet rst = super.exceQuery(sql);
+		String sql = "SELECT * FROM `cart_food` WHERE `user_id` = ?";
+		ResultSet rst = super.exceQuery(sql, userId);
 		try {
 			while (rst.next()) {
 				int id = rst.getInt(1);

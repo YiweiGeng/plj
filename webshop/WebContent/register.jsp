@@ -22,13 +22,13 @@
 			<p class="est animated wow zoomIn" data-wow-delay=".5s">注册时务必填写相关信息，谢谢</p>
 			<div class="login-form-grids">
 				<h6 class="animated wow slideInUp" data-wow-delay=".5s">账户信息</h6>
-				<form class="animated wow slideInUp" data-wow-delay=".5s" method="post">
+				<div class="animated wow slideInUp" data-wow-delay=".5s">
 					<input type="text" id="account" name="account" placeholder="账号" required="required " >
 					<input type="text" id="name" name="name" placeholder="昵称" required="required " >
 					<input type="password" id="pwd" name="pwd" placeholder="密码" required="required " >
 					<input type="password" id="pwdConfirm" name="pwdConfirm" placeholder="请确认密码" required="required " >
 					<input type="submit" onclick="registe()" value="注&nbsp;册">
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -46,10 +46,14 @@
 			$.ajax({
 				type:"post",
 				url:"UserServlet?method=Add",
+				dataType:"text",
 				data:{
 					"account":account,
 					"pwd":pwd,
 					"name":name,
+				},
+				success:function(data) {
+					alert(data);
 				}
 			})
 		}
